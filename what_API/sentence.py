@@ -5,7 +5,7 @@ from nltk.tokenize import sent_tokenize
 from google.cloud import translate_v2 as translate
 
 
-class Resource(object):
+class Sentence_Resource(object):
 
     def on_post(self, req, resp):
 
