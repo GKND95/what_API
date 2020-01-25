@@ -19,12 +19,13 @@ class Resource(object):
         # remove list elements with fewer than 15 characters
         reduced_sent_tokenized = [i for i in sent_tokenized if len(i) > 15]
 
-        # select which sentences to translate
+        # randomly select which sentences to translate, and remove any repeats
         sent_num = len(reduced_sent_tokenized)
         trans_num = sent_num//10
         chosen_sent = []
         for num in range(trans_num):
             chosen_sent.append(reduced_sent_tokenized[randint(0, sent_num-1)])
+        chosen_sent = list(set(chosen_sent))
 
         # translate selected sentence, and place in list of word pairs (also list)
         result = []
