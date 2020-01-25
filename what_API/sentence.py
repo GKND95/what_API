@@ -1,5 +1,6 @@
 import falcon
 import json
+from random import randint
 from nltk.tokenize import sent_tokenize
 from google.cloud import translate_v2 as translate
 
@@ -18,14 +19,30 @@ class Resource(object):
         # remove list elements with fewer than 15 characters
         reduced_sent_tokenized = [i for i in sent_tokenized if len(i) > 15]
 
+        # select which sentences to translate
+        sent_num = len(reduced_sent_tokenized)
+        trans_num = sent_num//10
+        chosen_sent = []
+        for num in range(trans_num):
+            chosen_sent.append(reduced_sent_tokenized[randint(0, sent_num-1)])
+
+        result = []
+        for sentence in chosen_sent:
+            text = sentence
+            target = 'fr'
+            model = 'nmt'
+            trans_result = translate_client.translate(text, target_language=target, model=model)
+            inner_array = [text, trans_result['translatedText']]
+            result.append(inner_array)
+
         # Google translate stuff
-        text = "Successful Test!"
-        target = 'fr'
-        model = 'nmt'
+        #text = "Successful Test!"
+        #target = 'fr'
+        #model = 'nmt'
 
         #result = translate_client.translate(text, target_language=target, model=model)
 
-        #resp.body = result['translatedText']
+        resp.body = json.dumps(result)
         resp.status = falcon.HTTP_200
 
 translate_client = translate.Client()
