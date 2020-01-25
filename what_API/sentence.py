@@ -26,6 +26,7 @@ class Resource(object):
         for num in range(trans_num):
             chosen_sent.append(reduced_sent_tokenized[randint(0, sent_num-1)])
 
+        # translate selected sentence, and place in list of word pairs (also list)
         result = []
         for sentence in chosen_sent:
             text = sentence
@@ -34,13 +35,6 @@ class Resource(object):
             trans_result = translate_client.translate(text, target_language=target, model=model)
             inner_array = [text, trans_result['translatedText']]
             result.append(inner_array)
-
-        # Google translate stuff
-        #text = "Successful Test!"
-        #target = 'fr'
-        #model = 'nmt'
-
-        #result = translate_client.translate(text, target_language=target, model=model)
 
         resp.body = json.dumps(result)
         resp.status = falcon.HTTP_200
