@@ -36,6 +36,7 @@ class Resource(object):
             inner_array = [text, trans_result['translatedText']]
             result.append(inner_array)
 
+        # send back json object containing resultant list of lists
         resp.body = json.dumps(result)
         resp.status = falcon.HTTP_200
 
