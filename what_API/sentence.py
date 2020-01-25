@@ -4,7 +4,7 @@ from google.cloud import translate_v2 as translate
 
 class Resource(object):
 
-    def on_get(self, req, resp):
+    def on_post(self, req, resp):
 
         text = "Successful Test!"
         target = 'fr'
