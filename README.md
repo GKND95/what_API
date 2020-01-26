@@ -14,9 +14,9 @@ the percentage of people that know them), and translation of any word on the web
 
 See repo for 'What' front end code at: https://github.com/YanivSilberman/what-client <br/> <br/>
 
-Set-up: <br/>
+#### Set-up: <br/>
 
-Note: Requires ngrok to be running on same port as gunicorn   https://ngrok.com/
+##### Note: Requires ngrok to be running on same port as gunicorn   https://ngrok.com/
 
 1. Activate virtual environment inside outer what_API folder
 
@@ -31,7 +31,7 @@ Note: Requires ngrok to be running on same port as gunicorn   https://ngrok.com/
     
 5. Activate ngrok on same port as gunicorn <br/> <br/>
 
-API routes:
+#### API routes:
 
 /sentence:        logic for selecting and translating random sentences on web page
 
