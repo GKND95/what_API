@@ -31,9 +31,10 @@ class Sentence_Resource(object):
         result = []
         for sentence in chosen_sent:
             text = sentence
+            source = 'en'
             target = 'fr'
             model = 'nmt'
-            trans_result = translate_client.translate(text, target_language=target, model=model)
+            trans_result = translate_client.translate(text, source_language=source, target_language=target, model=model)
             inner_array = [text, trans_result['translatedText']]
             result.append(inner_array)
 

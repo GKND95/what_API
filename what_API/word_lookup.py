@@ -15,16 +15,18 @@ class Word_Lookup_Resource(object):
         # translate selected sentence, and place in list of word pairs (also list)
         if lang == 'en':
             text = main_text
+            source = 'en'
             target = 'fr'
             model = 'nmt'
-            trans_result = translate_client.translate(text, target_language=target, model=model)
+            trans_result = translate_client.translate(text, source_language=source, target_language=target, model=model)
             result = trans_result['translatedText']
 
         if lang == 'fr':
             text = main_text
+            source = 'fr'
             target = 'en'
             model = 'nmt'
-            trans_result = translate_client.translate(text, target_language=target, model=model)
+            trans_result = translate_client.translate(text, source_language=source, target_language=target, model=model)
             result = trans_result['translatedText']
 
         # send back json object containing resultant list of lists
