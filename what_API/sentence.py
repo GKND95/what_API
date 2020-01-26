@@ -21,7 +21,7 @@ class Sentence_Resource(object):
 
         # randomly select which sentences to translate, and remove any repeats
         sent_num = len(reduced_sent_tokenized)
-        trans_num = sent_num//10
+        trans_num = sent_num//3
         chosen_sent = []
         for num in range(trans_num):
             chosen_sent.append(reduced_sent_tokenized[randint(0, sent_num-1)])
