@@ -6,6 +6,11 @@
 
 #### Authored by: Gavin Dove, January 2020 <br/> <br/>
 
+'What' enables frictionless practice of french reading, right in your browser. By letting you select nouns, adjectives,
+verbs, or entire sentences, 'What' uses NLP to scan the main body of text in any web page, selects appropriate words for
+translation from english to french, and re-inserts them in the mainbody of text, for a seemless user experience.
+Additional features include a translation frequency selector, a difficulty selector (based on a DB of 30,000 words and
+the percentage of people that know them), and translation of any word on the web page that the user highlights.
 
 See repo for 'What' front end code at: https://github.com/YanivSilberman/what-client <br/> <br/>
 
