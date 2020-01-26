@@ -29,7 +29,7 @@ See repo for 'What' front end code at: https://github.com/YanivSilberman/what-cl
 4. Start gunicorn: <br/>
     $ gunicorn --reload what_API.app
     
-5. Activate ngrok on same port as gunicorn <br/> <br/>
+5. In a new terminal, activate ngrok on same port as gunicorn <br/> <br/>
 
 #### API routes:
 
