@@ -12,6 +12,7 @@ translation from english to french, and re-inserts them in the mainbody of text,
 Additional features include a translation frequency selector, a difficulty selector (based on a DB of 30,000 words and
 the percentage of people that know them), and translation of any word on the web page that the user highlights.
 
+See devpost page for further project details: https://devpost.com/software/what-wp4cxu <br/>
 See repo for 'What' front end code at: https://github.com/YanivSilberman/what-client <br/> <br/>
 
 #### Set-up: <br/>
