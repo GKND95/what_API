@@ -2,7 +2,7 @@
 
 #### Concordia University Hacks 2020
 
-#### Team: Yaniv Silberman, Olga Sanchis, Gavin Dove, Kees Vandenberg
+#### Team: Gavin Dove, Yaniv Silberman, Olga Sanchis, Kees Vandenberg
 
 #### Authored by: Gavin Dove, January 2020 <br/> <br/>
 
