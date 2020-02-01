@@ -12,23 +12,11 @@ class Word_Resource(object):
 
     def on_post(self, req, resp):
 
-        # import pickled word database, format is: [(string, POS, dunno), ...]
-        word_db = pickle.load(open("what_API/lemmatized_word_data_pickle.p","rb"))
-        
-        # split word database into nouns, verbs, adjectives, and adverbs
-        word_db_noun = []
-        word_db_verb = []
-        word_db_adverb = []
-        word_db_adjective = []
-        for tup in word_db:
-            if tup[1][0] == 'N':
-                word_db_noun.append(tup)
-            if tup[1][0] == 'V':
-                word_db_verb.append(tup)
-            if tup[1][0] == 'R':
-                word_db_adverb.append(tup)
-            if tup[1][0] == 'J':
-                word_db_adjective.append(tup)
+        # import pickled word databases, format is: [(string, POS, dunno), ...]
+        word_db_noun = pickle.load(open('what_API/word_db_noun_pickle.p', 'rb'))
+        word_db_verb = pickle.load(open('what_API/word_db_verb_pickle.p', 'rb'))
+        word_db_adverb = pickle.load(open('what_API/word_db_adverb_pickle.p', 'rb'))
+        word_db_adjective = pickle.load(open('what_API/word_db_adjective_pickle.p', 'rb'))      
 
         # read input json for text and user settings
         json_data = json.loads(req.stream.read())
@@ -43,12 +31,11 @@ class Word_Resource(object):
         # tokenize by word - outputs list of word strings
         word_tokenized = word_tokenize(main_text)
 
-        # extract words that match user selected POS
+        # extract any words that match user selected POS
         pos_filtered_words = []
         for word in word_tokenized:
             temp_word = [word]
             word_tup = nltk.pos_tag(temp_word)
-            #print(word_tup[0][1][0])
             if (u_noun == True and word_tup[0][1][0] == 'N'):
                 pos_filtered_words.append(word)
             if (u_verb == True and word_tup[0][1][0] == 'V'):
@@ -64,60 +51,58 @@ class Word_Resource(object):
         for entry in pos_filtered_words:
             pos_filtered_tupl.append((entry, i))
             i += 1
-        #print(pos_filtered_tupl)
 
         # cut POS specific word databases according to user selected difficulty
         easy = 0.999
         inter_hard = 0.85
-        word_db_noun_cut = []
+        #word_db_noun_cut = []
         word_db_noun_cut_base = []
-        word_db_verb_cut = []
+        #word_db_verb_cut = []
         word_db_verb_cut_base = []
-        word_db_adverb_cut = []
+        #word_db_adverb_cut = []
         word_db_adverb_cut_base = []
-        word_db_adjective_cut = []
+        #word_db_adjective_cut = []
         word_db_adjective_cut_base = []
         for tupl in word_db_noun:
             if u_dif == 'easy' and tupl[2] > easy:
-                word_db_noun_cut.append(tupl)
+                #word_db_noun_cut.append(tupl)
                 word_db_noun_cut_base.append(tupl[0])
             if u_dif == 'intermediate' and (tupl[2] < easy and tupl[2] > inter_hard):
-                word_db_noun_cut.append(tupl)
+                #word_db_noun_cut.append(tupl)
                 word_db_noun_cut_base.append(tupl[0])
             if u_dif == 'hard' and tupl[2] < inter_hard:
-                word_db_noun_cut.append(tupl)
+                #word_db_noun_cut.append(tupl)
                 word_db_noun_cut_base.append(tupl[0])
         for tupl in word_db_verb:
             if u_dif == 'easy' and tupl[2] > easy:
-                word_db_verb_cut.append(tupl)
+                #word_db_verb_cut.append(tupl)
                 word_db_verb_cut_base.append(tupl[0])
             if u_dif == 'intermediate' and (tupl[2] < easy and tupl[2] > inter_hard):
-                word_db_verb_cut.append(tupl)
+                #word_db_verb_cut.append(tupl)
                 word_db_verb_cut_base.append(tupl[0])
             if u_dif == 'hard' and tupl[2] < inter_hard:
-                word_db_verb_cut.append(tupl)
+                #word_db_verb_cut.append(tupl)
                 word_db_verb_cut_base.append(tupl[0])
         for tupl in word_db_adverb:
             if u_dif == 'easy' and tupl[2] > easy:
-                word_db_adverb_cut.append(tupl)
+                #word_db_adverb_cut.append(tupl)
                 word_db_adverb_cut_base.append(tupl[0])
             if u_dif == 'intermediate' and (tupl[2] < easy and tupl[2] > inter_hard):
-                word_db_adverb_cut.append(tupl)
+                #word_db_adverb_cut.append(tupl)
                 word_db_adverb_cut_base.append(tupl[0])
             if u_dif == 'hard' and tupl[2] < inter_hard:
-                word_db_adverb_cut.append(tupl)
+                #word_db_adverb_cut.append(tupl)
                 word_db_adverb_cut_base.append(tupl[0])
         for tupl in word_db_adjective:
             if u_dif == 'easy' and tupl[2] > easy:
-                word_db_adjective_cut.append(tupl)
+                #word_db_adjective_cut.append(tupl)
                 word_db_adjective_cut_base.append(tupl[0])
             if u_dif == 'intermediate' and (tupl[2] < easy and tupl[2] > inter_hard):
-                word_db_adjective_cut.append(tupl)
+                #word_db_adjective_cut.append(tupl)
                 word_db_adjective_cut_base.append(tupl[0])
             if u_dif == 'hard' and tupl[2] < inter_hard:
-                word_db_adjective_cut.append(tupl)
+                #word_db_adjective_cut.append(tupl)
                 word_db_adjective_cut_base.append(tupl[0])
-        #print(word_db_noun_cut_base)
 
         # compare POS filtered words to relevant word database. Temporarily lemmatize.
         selected_id = []
@@ -151,7 +136,7 @@ class Word_Resource(object):
 
         print(pent_output)
 
-        # remove words without direct to french translation
+        # remove words without direct to french translation (de-activate with translation removed word database list)
         #en_to_fr_trimmed = []
         #for el in selected_id:
         #    lower = pos_filtered_tupl[el][0].lower()  
