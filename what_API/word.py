@@ -167,15 +167,14 @@ class Word_Resource(object):
         #chosen_sent = list(set(chosen_sent))
 
         # translate selected sentence, and place in list of word pairs (also list)
-        result = []
+        result = []       
         for sentence in final_output:
-            text = sentence
+            text = sentence          
             source = 'en'
             target = 'fr'
             model = 'nmt'
             trans_result = translate_client.translate(text, source_language=source, target_language=target, model=model)
-            inner_array = [text, trans_result['translatedText']]
-            result.append(inner_array)
+            result.append({'originalText': text, 'translatedText': trans_result['translatedText']})
 
         # send back json object containing resultant list of lists
         resp.body = json.dumps(result)
